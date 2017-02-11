@@ -34,3 +34,21 @@ class Solution(object):
         return result
 
 
+# little optimization that reduces run time
+class Solution(object):
+    def countBits(self, num):
+        """
+        :type num: int
+        :rtype: List[int]
+        """
+        result = [0]
+        power_counter = 0
+
+        for i in range(1, num+1):
+            if i&i-1 == 0:   # check if number is power of 2
+                result.append(1)
+                power_counter = i  # save it if number is power of 2
+            else:
+                result.append(1+ result[i-power_counter]) # result is just 1+ result[i-last saved power of 2]
+
+        return result
