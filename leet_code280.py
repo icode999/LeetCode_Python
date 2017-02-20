@@ -12,7 +12,7 @@ Show Similar Problems
 """
 
 # My own solution
-class Solution(object):
+class Solution1(object):
     def wiggleSort(self, nums):
         """
         :type nums: List[int]
@@ -27,7 +27,7 @@ class Solution(object):
                 nums[i], nums[i+1] = nums[i+1], nums[i]
 
 # Looked up solution
-class Solution(object):
+class Solution2(object):
     def wiggleSort(self, nums):
         for i in range(len(nums)-1):
             nums[i:i+2] = sorted(nums[i:i+2], reverse=i%2)
