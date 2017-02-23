@@ -19,7 +19,7 @@ Show Similar Problems
 #         self.right = None
 
 # level order traversal
-class Solution(object):
+class Solution1(object):
     def maxDepth(self, root):
         """
         :type root: TreeNode
@@ -45,3 +45,7 @@ class Solution(object):
             result += 1
 
         return result
+
+class Solution2(object):
+    def maxDepth(self, root):
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right)) if root else 0
