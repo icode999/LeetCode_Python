@@ -23,19 +23,13 @@ class Solution(object):
         if not nums:
             return nums
 
-        low = nums[0]
-        current = nums[0]
+        low = current = nums[0]
         result = list()
-        flag = True
-
         for num in nums[1:]:
             if current+1 != num:
                 result.append(str(low) if low == current else str(low) + "->" + str(current))
                 low = num
-                current = num
-                flag = False
-            else:
-                flag = True
-                current = num
+            current = num
+
         result.append(str(low) if low == current else str(low) + "->" + str(current))
         return result
