@@ -21,7 +21,7 @@ Given target = 20, return false.
 Hide Company Tags Amazon Google Apple
 
 """
-class Solution(object):
+class Solution1(object):
     def searchMatrix(self, matrix, target):
         """
         :type matrix: List[List[int]]
@@ -53,4 +53,40 @@ class Solution(object):
             else:
                 temp = temp[:pivot]
 
+        return False
+
+# instead of copying we just used indexes in binary search
+class Solution2(object):
+    def searchMatrix(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        def binary_search(lista):
+            if target > lista[-1]:
+                return False
+            start = 0
+            end = len(lista)
+
+            while start != end:
+                pivot = (start + end)/2
+                if lista[pivot] == target:
+                    return True
+
+                elif lista[pivot] < target:
+                    start = pivot+1
+
+                else:
+                    end = pivot
+
+            return False
+
+        for line in matrix:
+            if not line or line[0] > target:
+                return False
+            else:
+                result = binary_search(line)
+                if result:
+                    return result
         return False
