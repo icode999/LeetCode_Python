@@ -34,12 +34,10 @@ class Solution(object):
             if not string:
                 mapr[""].append(string)
                 continue
-            temp = '0'
-            char = ord(string[0])
+            temp, char = '', ord(string[0])
             for item in string[1:]:
-                temp += str((char - ord(item))%26)
+                temp += str((char - ord(item))%26)   # mod 26 because b-a = 1, a-z = -25
                 char = ord(item)
 
             mapr[temp].append(string)
-
         return mapr.values()
