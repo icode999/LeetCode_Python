@@ -41,3 +41,12 @@ class Solution(object):
 
             mapr[temp].append(string)
         return mapr.values()
+
+
+# Solution 2 short solution
+class Solution(object):
+    def groupStrings(self, strings):
+        mapr = defaultdict(list)
+        for string in strings:
+            mapr[tuple([(ord(string[0])-ord(char))%26 for char in string])].append(string)
+        return mapr.values()
