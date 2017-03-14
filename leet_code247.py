@@ -41,11 +41,12 @@ class Solution(object):
         :rtype: List[str]
         """
         one = ['0', '1', '8']
-        two = ["11","69","88","96", "00"]
+        two = ["00", "11","69","88","96"]
         if n == 1:
             return one
         elif n == 2:
-            return two[:-1]
+            return two[1:]
+
         else:
             if n % 2:
                 lista = self.findStrobogrammatic(n-1)
@@ -54,6 +55,6 @@ class Solution(object):
                 lista = self.findStrobogrammatic(n-2)
                 listb = two[:]
 
-            result = [i[:len(i)/2] + j + i[len(i)/2:] for j in listb for i in lista]
+            result = [i[:len(i)/2] + j + i[len(i)/2:] for i in lista for j in listb]
             return result
 
