@@ -32,7 +32,7 @@ n == 5?
 => it can be retrieved if you insert [0, 1, 8] to the middle of solution of n == 4
 
 the same, for n == 6, it can be retrieved if you insert [11, 88, 69, 96, 00] to the middle of solution of n == 4
-
+.
 """
 class Solution(object):
     def findStrobogrammatic(self, n):
