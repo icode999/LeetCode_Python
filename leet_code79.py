@@ -22,6 +22,7 @@ Hide Tags Array Backtracking
 Show Similar Problems
 """
 
+# MOWN solution except that changing back the visited status (BUG)
 class Solution:
     def exist(self, board, word):
         if not board or not word:
@@ -56,5 +57,5 @@ class Solution:
 
                 if result:
                     return result
-        self.visited[i][j] = 0   # changing this back to not visited is really important
+        self.visited[i][j] = 0   # changing this back to not visited is really important  (BUG)
         return False
