@@ -13,7 +13,7 @@ Hide Tags Array Dynamic Programming Divide and Conquer
 Show Similar Problems
 
 """
-
+# MOWN solution
 class Solution(object):
     def maxSubArray(self, nums):
         """
