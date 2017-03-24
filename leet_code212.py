@@ -31,6 +31,10 @@ Show Similar Problems
 
 """
 
+# LUP Solution
+
+# Build a trie for words and pass that trie to find method and do DFS
+# everytime end trie is reached append the word
 
 class Solution(object):
     def findWords(self, board, words):
