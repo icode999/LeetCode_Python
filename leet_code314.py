@@ -131,3 +131,24 @@ class Solution(object):
                     keyss.sort()
                     result = [mapr[key][:] for key in keyss]
                     return result
+
+
+# LUP solution, but pretty simple idea
+
+from collections import defaultdict
+class Solution(object):
+    def verticalOrder(self, root):
+        if not root:
+            return []
+
+        mapr = defaultdict(list)
+        stack = [(0, root)]
+
+        while stack:
+            counter, troot = stack.pop(0)
+            mapr[counter].append(troot.val)
+            if troot.left:
+                stack.append((counter-1, troot.left))
+            if troot.right:
+                stack.append((counter+1, troot.right))
+        return [mapr[key] for key in sorted(mapr.keys())]
