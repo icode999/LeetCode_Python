@@ -99,3 +99,35 @@ class Solution(object):
         for key in keyss:
             result.append(mapr[key])
         return result
+
+
+# Doing pre-order recursive didnt work either with
+# [3,9,8,4,0,1,7,null,null,null,2,5]
+
+from collections import defaultdict
+class Solution(object):
+    def verticalOrder(self, root):
+        if not root:
+            return []
+
+        stack = list()
+        counter = 0
+        mapr = defaultdict(list)
+        troot = root
+
+        while True:
+            if troot:
+                mapr[counter].append(troot.val)
+                stack.append((counter, troot))
+                troot = troot.left
+                counter -= 1
+            else:
+                if stack:
+                    counter, troot = stack.pop()
+                    troot = troot.right
+                    counter += 1
+                else:
+                    keyss = mapr.keys()
+                    keyss.sort()
+                    result = [mapr[key][:] for key in keyss]
+                    return result
