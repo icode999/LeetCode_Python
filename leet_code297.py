@@ -99,6 +99,69 @@ class Codec:
             else:
                 current_level_nodes = next_level_nodes[:]
 
+#Solution : DFS/preorder ([1, 2, 3, 4, 5, 6, 7] --->  1,2,4,n,n,5,n,n,3,6,n,n,7,n,n)
+# serializing is trivial , just pre order iterative, however de-serialize is tricky, you have to maintain flags to insert left or right
+
+class Codec:
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+
+        :type root: TreeNode
+        :rtype: str
+        """
+        if not root:
+            return None
+
+        result = ''
+        stack = list()
+        troot = root
+        while True:
+            if troot:
+                stack.append(troot)
+                result += str(troot.val) + ','
+                troot = troot.left
+            else:
+                result += 'n,'
+                if stack:
+                    troot = stack.pop()
+                    troot = troot.right
+                else:
+                    result = result.rstrip(',')
+                    print result
+                    return result
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+
+        :type data: str
+        :rtype: TreeNode
+        """
+        if not data:
+            return None
+
+        data_list = data.split(',')
+        root = TreeNode(str(data_list.pop(0)))
+
+        stack, troot, left = list(), root, True
+        for val in data_list:
+            if val != 'n':
+                if left:
+                    stack.append(troot)
+                    troot.left = TreeNode(str(val))
+                    troot = troot.left
+                else:
+                    troot.right = TreeNode(str(val))
+                    troot = troot.right
+                left = True
+
+            else:
+                if not left:
+                    if stack:
+                        troot = stack.pop()
+                    else:
+                        return root
+                else:
+                    left = False
 
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()
