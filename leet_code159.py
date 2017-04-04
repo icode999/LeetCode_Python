@@ -14,7 +14,7 @@ Show Similar Problems
 
 # Solution: o(n) run time and o(1) space, just save two distinct chars latest occurance. When third
 # distinct char comes update the minimum char
-
+# partial LUP
 class Solution(object):
     def lengthOfLongestSubstringTwoDistinct(self, s):
         """
