@@ -18,8 +18,15 @@ Show Similar Problems
 #         self.left = None
 #         self.right = None
 
-# level order traversal
-class Solution1(object):
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+# Iterative BFS
+class Solution(object):
     def maxDepth(self, root):
         """
         :type root: TreeNode
@@ -43,9 +50,32 @@ class Solution1(object):
             if not nodes_list:
                 break
             result += 1
-
         return result
 
-class Solution2(object):
+# recursive DFS
+class Solution(object):
     def maxDepth(self, root):
         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right)) if root else 0
+
+# in order (Iterative DFS)
+class Solution(object):
+    def maxDepth(self, root):
+        result = 0
+        if root:
+            troot = root
+        else:
+            return result
+
+        current, stack = 0, list()
+        while True:
+            if troot:
+                stack.append((troot, current+1))
+                troot = troot.left
+                current += 1
+            else:
+                if stack:
+                    troot, current = stack.pop()
+                    result = max(result, current)
+                    troot = troot.right
+                else:
+                    return result
