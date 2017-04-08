@@ -27,6 +27,7 @@ Hide Tags Tree
 #         self.left = None
 #         self.right = None
 
+
 class Solution(object):
     def invertTree(self, root):
         """
@@ -38,4 +39,38 @@ class Solution(object):
         temp = root.right
         root.right = self.invertTree(root.left)
         root.left = self.invertTree(temp)
+        return root
+
+# BFS iterative
+class Solution(object):
+    def invertTree(self, root):
+        if not root:
+            return None
+        stack = [root]
+
+        while True:
+            temp = list()
+            for node in stack:
+                node.left, node.right = node.right, node.left
+                for cnode in [node.left, node.right]:
+                    if cnode:
+                        temp.append(cnode)
+            if temp:
+                stack = temp[:]
+            else:
+                return root
+
+# BFS iterative simple (LUP)
+class Solution(object):
+    def invertTree(self, root):
+        if not root:
+            return None
+
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                node.left, node.right = node.right, node.left
+                stack += node.left, node.right
+
         return root
