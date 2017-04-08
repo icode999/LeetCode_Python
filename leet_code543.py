@@ -28,7 +28,7 @@ Show Tags
 #         self.right = None
 
 # LUP
-# Solution: max diameter can start from any node in the entire tree, so @ everynode we find max depth at the same time we get max diameter
+# Solution: max diameter can start from any node in the entire tree, so @ every node we find max depth at the same time we get max diameter
 
 class Solution(object):
     def diameterOfBinaryTree(self, root):
