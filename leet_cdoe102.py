@@ -30,6 +30,7 @@ Show Similar Problems
 #         self.left = None
 #         self.right = None
 
+# iterative
 from collections import deque
 class Solution(object):
     def levelOrder(self, root):
@@ -54,3 +55,20 @@ class Solution(object):
             if not temp_s:
                 return result
             stack = deque(temp_s)
+
+# simplified iterative
+class Solution(object):
+    def levelOrder(self, root):
+        if not root:
+            return []
+
+        stack, result = [root], []
+        while stack:
+            result.append([node.val for node in stack])
+            temp = []
+            for node in stack:
+                temp += [node.left, node.right]
+
+            stack = [node for node in temp if node]
+
+        return result
