@@ -41,3 +41,11 @@ class Solution(object):
 
             stack = temp_s[:]
 
+# Recursive DFS
+class Solution(object):
+    def minDepth(self, root):
+        if not root:
+            return 0
+        else:
+            depth = map(self.minDepth, [root.left, root.right])
+            return 1 + (min(depth) or max(depth))
