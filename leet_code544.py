@@ -35,6 +35,7 @@ Hide Company Tags Google
 Show Tags
 """
 
+#MOWN
 class Solution(object):
     def findContestMatch(self, n):
         """
@@ -57,3 +58,12 @@ class Solution(object):
                 result = temp[:]
             result = tuple(result[0])
             return str(result).replace(" ", "")
+
+# LUP solution
+class Solution(object):
+    def findContestMatch(self, n):
+        result = range(1, n+1)
+        while len(result) > 1:
+            result = zip(result, result[:len(result)/2-1:-1])
+
+        return str(result[0]).replace(' ', '')
