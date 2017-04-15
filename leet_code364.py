@@ -73,7 +73,7 @@ class Solution(object):
         """
         mapr, maxer = defaultdict(list), 1
         stack = [[1, iter(nestedList)]]
-        
+
         while stack:
             weight, iterator = stack.pop()
             next_ele = next(iterator, None)
@@ -93,5 +93,32 @@ class Solution(object):
                 result += val*adjust
 
             adjust -= 1
+
+        return result
+
+# LUP Solution
+# Instead of multiplying by depth, add integers multiple times (by going level by level and adding the unweighted sum to the weighted sum after each level).
+
+from collections import deque
+class Solution(object):
+    def depthSumInverse(self, nestedList):
+        que = deque([iter(nestedList)])
+
+        result, temp = 0, 0
+        while que:
+            iterator = que.popleft()
+            next_ele = next(iterator, None)
+            tque = list()
+            while next_ele:
+                if next_ele.isInteger():
+                    temp += next_ele.getInteger()
+                else:
+                    tque += next_ele.getList()
+
+                next_ele = next(iterator, None)
+            if tque:
+                que.append(iter(tque))
+
+            result += temp
 
         return result
