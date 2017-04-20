@@ -30,7 +30,6 @@ Show Similar Problems
 """
 
 class NumMatrix(object):
-
     def __init__(self, matrix):
         """
         :type matrix: List[List[int]]
