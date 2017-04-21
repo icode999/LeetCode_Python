@@ -27,6 +27,8 @@ Hide Similar Problems (M) Populating Next Right Pointers in Each Node (M) Bounda
 #         self.right = None
 
 # Solution: BFS level order iterative
+# MOWN BFS
+
 class Solution(object):
     def rightSideView(self, root):
         """
@@ -51,3 +53,25 @@ class Solution(object):
                 break
 
         return result
+
+# MOWN  DFS
+
+from collections import defaultdict
+class Solution(object):
+    def rightSideView(self, root):
+        if not root:
+            return list()
+        mapr, stack, troot, counter = defaultdict(), list(), root, 0
+        while True:
+            if troot:
+                counter += 1
+                stack.append([troot, counter])
+                troot = troot.left
+            else:
+                if stack:
+                    troot, counter = stack.pop()
+                    mapr[counter], troot = troot.val, troot.right
+                else:
+                    break
+
+        return map(lambda i: mapr[i], sorted(mapr.keys()))
