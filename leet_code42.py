@@ -14,6 +14,8 @@ Hide Tags Array Stack Two Pointers
 Hide Similar Problems (M) Container With Most Water (M) Product of Array Except Self (H) Trapping Rain Water II
 
 """
+# Solution: two pointer solution, compare left height and right height, move the pointer that have less height.
+# While moving pointers make sure, if hit bucket that traps water and calculate the bucket depth and add it to result
 class Solution(object):
     def trap(self, height):
         """
