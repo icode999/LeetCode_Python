@@ -16,7 +16,7 @@ Show Similar Problems
 """
 
 # OWN Soultion
-# Solution: devide and conquer, if we see that nums[low] > nums[high] there is rotation in that part, so we devide the list as low:pivot and pivot+1:high and do 2 Bianry search for each part recursively
+# Solution: devide and conquer, if we see that nums[low] > nums[high] there is rotation in that part, so we devide the list as low:pivot and pivot+1:high and do 2 Binary search for each part recursively
 
 # if nums[low] < nums[high] there is no rotation so we just do regular binary search
 class Solution(object):

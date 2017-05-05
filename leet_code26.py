@@ -22,7 +22,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
 
-        Own Solution: two pointer, first pointer will point to currnet location where value should be replaced, second pointer moves forward to find next non repetitive num
+        Own Solution: two pointer, first pointer will point to current location where value should be replaced, second pointer moves forward to find next non repetitive num
         """
         if len(nums) < 2:
             return len(nums)

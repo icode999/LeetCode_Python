@@ -28,7 +28,7 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
-        candidates.sort()  # Bug: Didnt sort, need sort because for test case [4,2,8]  8
+        candidates.sort()  # Bug: Did not sort, need sort because for test case [4,2,8]  8
         # W/O sort : [[4,4],[2,2,2,2],[8]], expected O/P is: [[2,2,2,2],[2,2,4],[4,4],[8]]
         return self.getcomb(candidates, target)
 
