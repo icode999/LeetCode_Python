@@ -48,3 +48,31 @@ class Solution(object):
                     result.append(char+temp)
 
         return result
+
+# MOWN iterative
+class Solution(object):
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        mapr = {'1': '*', '2': 'abc', '3': 'def', '4': 'ghi',
+                '5': 'jkl', '6': 'mno', '7': 'pqrs', '8': 'tuv',
+                '9': 'wxyz'
+                }
+        tresult = list()
+        if not digits:
+            return tresult
+        else:
+            tresult = list(mapr[digits[0]])
+
+        result = list()
+        for num in list(digits)[1:]:
+            for item in tresult:
+                for char in list(mapr[num]):
+                    result.append(item + char)
+
+            tresult = result[:]
+            result = list()
+
+        return tresult
