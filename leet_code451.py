@@ -42,7 +42,7 @@ Note that 'A' and 'a' are treated as two different characters.
 from collections import defaultdict
 
 # MOWN
-# Solution: list dict, one for char: freq and second one for freq: [chars] and sort second dict keys and append
+# Solution: two dict, one for char: freq and second one for freq: [chars] and sort second dict keys and append
 class Solution(object):
     def frequencySort(self, s):
         """
