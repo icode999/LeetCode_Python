@@ -25,6 +25,7 @@ For example, the lowest common ancestor (LCA) of nodes 5 and 1 is 3. Another exa
 #         self.left = None
 #         self.right = None
 
+# MOWN
 class Solution(object):
     def lowestCommonAncestor(self, root, p, q):
         """
