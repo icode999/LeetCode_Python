@@ -54,9 +54,6 @@ class Solution(object):
 
 # MOWN Iterative
 class Solution(object):
-    def __init__(self):
-        self.map = dict()
-
     def getImportance(self, employees, id):
         """
         :type employees: Employee
@@ -65,17 +62,13 @@ class Solution(object):
         """
         result = 0
         stack = [id]
-        self.build_map(employees)
+        mapr = {employee.id: employee for employee in employees}
 
         while stack:
             current = stack.pop()
-            result += self.map[current].importance
+            result += mapr[current].importance
 
-            for sub in self.map[current].subordinates:
+            for sub in mapr[current].subordinates:
                 stack.append(sub)
 
         return result
-
-    def build_map(self, employees):
-        for employee in employees:
-            self.map[employee.id] = employee
