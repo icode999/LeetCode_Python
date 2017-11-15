@@ -52,6 +52,28 @@ class Solution(object):
             result += 1
         return result
 
+# Level Order Traversal
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        result = 0
+        if not root:
+            return result
+
+        current_level = [root]
+        while True:
+            next_level = [tnode for node in current_level for tnode in [node.left, node.right] if tnode]
+            result += 1
+            if next_level:
+                current_level = next_level[:]
+            else:
+                break
+
+        return result
+
 # recursive DFS
 class Solution(object):
     def maxDepth(self, root):
