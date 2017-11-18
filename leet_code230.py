@@ -19,6 +19,8 @@ What if the BST is modified (insert/delete operations) often and you need to fin
 #         self.right = None
 
 # MOWN
+# inorder travesal and decrement k each time we print a node, when k is 0 we found kth smallest
+
 class Solution(object):
     def kthSmallest(self, root, k):
         """
