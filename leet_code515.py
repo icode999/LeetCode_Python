@@ -49,3 +49,19 @@ class Solution(object):
                 if node:
                     row.append(node)
         return result
+
+
+# MOWN BFS
+class Solution(object):
+    def largestValues(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        row = [root] if root else list()
+        result = list()
+
+        while row:
+            result.append(max(node.val for node in row))
+            row = [node for tnode in row for node in [tnode.left, tnode.right] if node]
+        return result
