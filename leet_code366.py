@@ -42,51 +42,41 @@ Show Tags
 #         self.left = None
 #         self.right = None
 
-class Solution1(object):
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+
+# LUP
+# Build a map {depth: [list of nodes]} then iterate through that map and populate result
+from collections import defaultdict
+class Solution(object):
     def findLeaves(self, root):
         """
         :type root: TreeNode
         :rtype: List[List[int]]
-
-        Do a level order first and get the height of each node (height is the max depth) and populate dict
-        return result by iterating through the dict
         """
-        if not root:
-            return []
+        self.mapr = defaultdict(list)
+        self.build_height_map(root)
 
-        mapr = dict()
-        temp_r = [root]
+        keys = self.mapr.keys()
+        keys.sort()
 
-        temp = list()
-        while True:
-            for node in temp_r:
-                if node.left:
-                    temp.append(node.left)
-                if node.right:
-                    temp.append(node.right)
+        result = list()
+        for key in keys:
+            result.append(self.mapr[key])
 
-                height = self.get_height(node)
-                if mapr.has_key(height):
-                    mapr[height].append(node.val)
-                else:
-                    mapr[height] = [node.val]
-
-            if not temp:
-                break
-            temp_r = temp[:]
-            temp = list()
-
-        keyr = mapr.keys()
-        keyr.sort()
-        result = [mapr[key] for key in keyr]
         return result
 
-    def get_height(self, node):
-        if not node:
+    def build_height_map(self, root):
+        if not root:
             return 0
 
-        if not node.right and not node.left:
-            return 1
+        left = self.build_height_map(root.left)
+        right = self.build_height_map(root.right)
 
-        else:
-            return 1 + max(self.get_height(node.left), self.get_height(node.right))
+        self.mapr[max(left, right) + 1].append(root.val)
+        return max(left, right) + 1
