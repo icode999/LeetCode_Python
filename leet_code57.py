@@ -18,9 +18,12 @@ Google Facebook LinkedIn
 
 """
 
-# MOWN solution
-# Append the new interval to intervals list and sort it
-# then it is no different from merging intervals
+
+# LUP solution
+# If they overlap, merge them to newInterval;
+# If intervals[i] is to the left of newInterval, push intervals[i] to the result vector;
+# If newInterval is to the left of intervals[i], push newInterval and all the remaining intervals (intervals[i], ..., intervals[n - 1]) to the result vector.
+
 
 # Definition for an interval.
 # class Interval(object):
@@ -35,20 +38,19 @@ class Solution(object):
         :type newInterval: Interval
         :rtype: List[Interval]
         """
-        if not intervals:
-            return [newInterval]
-
-        intervals.append(newInterval)
-        intervals = sorted(intervals, key=lambda x: x.start)
-        current = intervals[0]
         result = list()
-        for i in range(1, len(intervals)):
-            if current.end >= intervals[i].start:
-                current.end = max(current.end, intervals[i].end)
+        for i in range(len(intervals)):
+            if intervals[i].end < newInterval.start:
+                result.append(intervals[i])
+
+            elif newInterval.end < intervals[i].start:
+                result.append(newInterval)
+                result += intervals[i:]
+                return result
 
             else:
-                result.append(current)
-                current = intervals[i]
+                newInterval.start = min(newInterval.start, intervals[i].start)
+                newInterval.end = max(newInterval.end, intervals[i].end)
 
-        result.append(current)
+        result.append(newInterval)
         return result
