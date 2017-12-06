@@ -11,6 +11,8 @@ The number 2 can't find next greater number;
 The second 1's next greater number needs to search circularly, which is also 2.
 Note: The length of given array won't exceed 10000.
 
+Companies 
+Google 
 """
 
 
