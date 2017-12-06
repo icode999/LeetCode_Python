@@ -16,6 +16,8 @@ Companies
 Bloomberg 
 
 """
+# MOWN solution after Next Greater I and II
+
 class Solution(object):
     def nextGreaterElement(self, n):
         """
