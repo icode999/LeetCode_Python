@@ -18,6 +18,10 @@ Output:
 Companies 
 Google 
 """
+# MOWN Solution
+# since 1 <= a[i] <= n we can multiply the abs(number at index nums[i]) with -1
+# now look for nums < 0
+
 class Solution(object):
     def findDisappearedNumbers(self, nums):
         """
