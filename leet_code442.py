@@ -38,3 +38,25 @@ class Solution(object):
             nums[idx] += 0.1
 
         return [idx + 1 for idx, num in enumerate(nums) if num - int(num) > 0.15]
+
+
+# LUP idea
+# everytime we hit second negative number save the idex to result
+# similar to finding  "Find All Numbers Disappeared in an Array"
+
+class Solution(object):
+    def findDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        result = list()
+
+        for i in range(len(nums)):
+            index = abs(nums[i]) - 1
+            if nums[index] < 0:
+                result.append(index + 1)
+            else:
+                nums[index] = abs(nums[index]) * -1
+
+        return result
