@@ -36,15 +36,13 @@ class TwoSum(object):
         :type value: int
         :rtype: bool
         """
-        # Bug 1: not checking (value-num != num and self.data[value-num] > 0)
+        # Bug 1: not checking (value-num != num)  in if condition
         # this will fail ["TwoSum","add","add","add","find"]  and [[],[0],[-1],[1],[0]]
-
         # Bug 2: Using defaultdict will add key to the dict if someone call mapr[key] which doesnt exist
         # so we have to check if mapr has key or not before calling it
-
         for num in self.data.keys():
-            if self.data.has_key(value - num):
-                if (value - num == num and self.data[num] > 1) or (value - num != num and self.data[value - num] > 0):
+            if self.data.has_key(value-num):
+                if (value-num == num and self.data[num] > 1) or (value-num != num):
                     return True
         return False
 
