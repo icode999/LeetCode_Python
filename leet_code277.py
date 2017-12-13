@@ -23,7 +23,7 @@ Return the celebrity's label if there is a celebrity in the party. If there is n
 
 # MOWN Solution
 # for each person we check if he is known by everyone else (while we do that we update our dp list)
-# two updates: 1) for everyonelse if they know current person, we update that "everyone" person is not celebirty
+# two updates: 1) for everyone else if they know current person, we update that "everyone" person is not celebirty
 # 2) if everyone else doesnt know we update current person as not celebrity
 
 class Solution(object):
@@ -53,3 +53,38 @@ class Solution(object):
                 return idx
 
         return -1
+
+
+# LUP Solution
+'''
+first, if person A knows person B, then B could be the candidate of being a celebrity, 
+A must not be a celebrity. We iterate all the n persons and we will have a candidate that everyone knows this candidate.
+
+second, we check two things after we get this candidate. 1. If this candidate knows other person in the group, 
+if the candidate knows anyone in the group, then the candidate is not celebrity, return -1; 2. 
+if everyone knows this candidate, if anyone does not know the candidate, return -1;
+'''
+
+
+class Solution(object):
+    def findCelebrity(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n <= 1:
+            return n
+
+        celebrity = 0
+        for i in range(1, n):
+            if not knows(i, celebrity):
+                celebrity = i
+
+        for i in range(n):
+            if i == celebrity:
+                continue
+
+            if not knows(i, celebrity) or knows(celebrity, i):
+                return -1
+
+        return celebrity
