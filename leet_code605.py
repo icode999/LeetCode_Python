@@ -28,28 +28,10 @@ class Solution(object):
         :type n: int
         :rtype: bool
         """
-        if not n:
-            return True
-
-        if flowerbed[0] == 0:
-            if len(flowerbed) > 1:
-                if not flowerbed[1]:
-                    flowerbed[0] = 1
-                    n = n - 1
-            else:
-                flowerbed[0] = 1
-                n = n - 1
-        i = 0
+        flowerbed = [0] + flowerbed + [0]
         for i in range(1, len(flowerbed) - 1):
-            if not n:
-                return True
-
-            if flowerbed[i - 1] == 0 and flowerbed[i] == 0 and flowerbed[i + 1] == 0:
+            if flowerbed[i - 1] == flowerbed[i] == flowerbed[i + 1] == 0:
+                n -= 1
                 flowerbed[i] = 1
-                n = n - 1
 
-        if flowerbed[i] == 0 and flowerbed[i + 1] == 0:
-            flowerbed[i + 1] = 0
-            n = n - 1
-
-        return True if n < 1 else False
+        return n <= 0
