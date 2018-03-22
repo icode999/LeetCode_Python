@@ -63,7 +63,8 @@ Hide Similar Problems
 """
 
 #Solution: Do in order iterative
-# Doing in order which will give wrong answer interms of "If two nodes are in the same row and column, the order should be from left to right.", but will give correct answer if you dont have that.
+# Doing in order which will give wrong answer interms of "If two nodes are in the same row and column, the order should be from left to right.",
+# but will give correct answer if you dont have that.
 from collections import defaultdict
 class Solution(object):
     def verticalOrder(self, root):

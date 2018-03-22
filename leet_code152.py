@@ -13,7 +13,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
 
-        Solution: for each point we save both postive and negative while maintaining current max (Came up)
+        Solution: for each point we save both positive and negative while maintaining current max (Came up)
         """
         dp = [[0,nums[0]] if nums[0]<=0 else [nums[0], 0]]
         result = nums[0]
@@ -39,7 +39,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
 
-        Solution: for each point we save both postive and negative while maintaining current max (Came up)
+        Solution: for each point we save both positive and negative while maintaining current max (Came up)
         """
         max_here, min_here = [0,nums[0]] if nums[0]<=0 else [nums[0],0]
         result = nums[0]

@@ -41,7 +41,7 @@ class Solution(object):
 
 
 # LUP idea
-# everytime we hit second negative number save the idex to result
+# everytime we hit second negative number save the index to result
 # similar to finding  "Find All Numbers Disappeared in an Array"
 
 class Solution(object):
