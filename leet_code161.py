@@ -33,7 +33,7 @@ class Solution(object):
 
         return self.Helper(s, t) if len(s) <= len(t) else self.Helper(t, s)
 
-    def Helper(self, s, t, c=0):
+    def Helper(self, s, t):
         for i in range(len(s)):
             if s[i] != t[i]:
                 return s[i + 1:] == t[i + 1:] or s[i:] == t[i + 1:]
