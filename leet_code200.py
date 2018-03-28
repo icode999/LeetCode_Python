@@ -26,53 +26,27 @@ Show Similar Problems
 
 """
 
-# My solution
-class Solution1(object):
+# MOWN
+class Solution(object):
     def numIslands(self, grid):
         """
         :type grid: List[List[str]]
         :rtype: int
-        Soltion: land and expand, mark the visited blocks
         """
-        if not grid:
+        if not grid or not grid[0]:
             return 0
-        self.visited = [([False]*len(grid[0]))[:] for i in range(len(grid))]
-
         result = 0
+
         for i in range(len(grid)):
             for j in range(len(grid[0])):
-                if grid[i][j] == "1" and not self.visited[i][j]:
-                    result += 1  # Everytime we hit a non vistied '1' we mark it as new isalnd starting
+                if grid[i][j] == "1":
+                    result += 1
+                    stack = [[i, j]]
+                    while stack:
+                        ti, tj = stack.pop()
+                        grid[ti][tj] = "0"
 
-                    self.visited[i][j] = True
-                    self.sweep(grid, i, j)
+                        for ni, nj in [[ti - 1, tj], [ti + 1, tj], [ti, tj - 1], [ti, tj + 1]]:
+                            if 0 <= ni < len(grid) and 0 <= nj < len(grid[0]) and grid[ni][nj] == "1":
+                                stack.append([ni, nj])
         return result
-
-    def sweep(self, grid, i, j):
-        for m, n in [[i-1, j], [i+1, j], [i, j-1], [i, j+1]]:
-            if 0 <= m < len(grid) and 0 <= n < len(grid[0]):
-                if not self.visited[m][n] and grid[m][n] == "1":
-                    self.visited[m][n] = True
-                    self.sweep(grid, m, n)
-
-# Looked up solution
-# No extra space but this modifies the given grid
-
-class Solution2(object):
-    def numIslands(self, grid):
-        def sink(i, j):
-            if 0 <= i < len(grid) and 0 <= j < len(grid[0]) and grid[i][j] == "1":
-                grid[i][j] = "0"
-                map(sink, [i-1, i+1, i, i], [j, j, j-1, j+1])
-                return 1
-            else:
-                return 0
-        result = 0
-        '''
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                result += sink(i, j)
-
-        return result
-        '''
-        return sum(sink(i, j) for i in range(len(grid)) for j in range(len(grid[0])))
