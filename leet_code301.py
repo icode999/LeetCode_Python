@@ -18,63 +18,61 @@ Show Similar Problems
 
 """
 
-"""
-Solution:
-
-BFS, with the input string s, we generate all possible states by removing one ( or ), check if they are valid, if found valid ones on the current level, put them to the final result list and we are done, otherwise, add them to a queue and carry on to the next level.
-
-However, it does it implicitly. For a string of parentheses to be valid, its number of parentheses should be even. And at any time, strings in queue will only differ in length of 1 (this is the implicit control). When we find "()()" to be valid, both "()" and "" have not been added to queue yet and all the shorter strings are of length of 3, which must be invalid.
-
-Once we hit found, we will not add any other levels to our queue, Also since all the valid parentheses will have even number of parentheses, whatever the added next level parentheses will be False anyways
-
-"""
+# BFS
+# check for valid in all possibilities
 class Solution(object):
     def removeInvalidParentheses(self, s):
         """
         :type s: str
         :rtype: List[str]
         """
+
         def is_valid(string):
             count = 0
             for char in string:
-                if char == '(':
-                    count += 1
-                elif char == ')':
-                    count -= 1
-                    if count < 0:
-                        return False
-
+                count += (char == "(") - (char == ")")
+                if count < 0:
+                    return False
             return count == 0
 
-        result = list()
-        visited = dict()
-        queue = list()
+        level = {s}
+        while True:
+            result = filter(is_valid, level)
+            if result:
+                return result
 
-        if is_valid(s):
-            return [s]
+            level = {word[:i] + word[i + 1:] for word in level for i in range(len(word)) if word[i] in ["(", ")"]}
 
-        else:
-            queue.append(s)
-            visited[s] = True
 
-        found = False
-        while queue:
-            tmp_str = queue.pop(0)
-            if is_valid(tmp_str):
-                result.append(tmp_str)
-                found = True
+# LUP Solution
+# https://leetcode.com/problems/remove-invalid-parentheses/discuss/75027/Easy-Short-Concise-and-Fast-Java-DFS-3-ms-solution
 
-            if found:
+class Solution(object):
+    def removeInvalidParentheses(self, s):
+        """
+        :type s: str
+        :rtype: List[str]
+        """
+        self.result = list()
+        self.remove(s, 0, 0, ["(", ")"])
+        return self.result
+
+    def remove(self, s, li, lj, par):
+        counter = 0
+        for i in range(li, len(s)):
+            counter += (s[i] == par[0]) - (s[i] == par[1])
+
+            if counter >= 0:
                 continue
 
-            for i in range(len(tmp_str)):
-                if tmp_str[i] not in ['(', ')']:
-                    continue
+            for j in range(lj, i + 1):
+                if s[j] == par[1] and (j == lj or s[j - 1] != par[1]):
+                    self.remove(s[:j] + s[j + 1:], i, j, par)
 
-                temp = tmp_str[:i] + tmp_str[i+1:]
-                if not visited.has_key(temp):
-                    queue.append(temp)
-                    visited[temp] = True
+            return
 
-        return result
-
+        reverse = s[::-1]
+        if par[0] == "(":
+            self.remove(reverse, 0, 0, [")", "("])
+        else:
+            self.result.append(reverse)
