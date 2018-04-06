@@ -17,26 +17,27 @@ If n = 4 and k = 2, a solution is:
 
 """
 
-# LUP solution  got TLE
+# MOWN
 class Solution(object):
     def combine(self, n, k):
-        self.result = list()
-        self.combine_l(n, k)
-        return self.result
-
-    def combine_l(self, n, k, position=0, result=list()):
         """
         :type n: int
         :type k: int
         :rtype: List[List[int]]
         """
-        if len(result) == k:
-            self.result.append(result[:])
-            return
+        return self.Helper(range(1, n + 1), k)
 
-        for i in range(position, n):
-            result.append(i + 1)
-            self.combine_l(n, k, i + 1, result)
-            result.pop()
+    def Helper(self, listr, n):
+        if n > len(listr) or n == 0:
+            return []
 
-        return
+        if n == 1:
+            return [[i] for i in listr]
+
+        result = list()
+        for i in range(len(listr)):
+            tresult = self.Helper(listr[i + 1:], n - 1)
+            if tresult:
+                result += [[listr[i]] + temp for temp in tresult]
+
+        return result
