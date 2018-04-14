@@ -170,7 +170,6 @@ class Solution(object):
                 while temp:
                     temp &= temp - 1
                     count += 1
-
                 result += count * (count - 1) >> 1
 
         return result

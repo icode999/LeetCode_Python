@@ -24,7 +24,6 @@ Hide Company Tags Google
 Hide Tags Two Pointers Sort
 
 """
-
 # MOWN
 # Solution: Sort d and for each word in d see if it exists in s
 class Solution(object):

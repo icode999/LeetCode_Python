@@ -17,7 +17,7 @@ If n = 4 and k = 2, a solution is:
 
 """
 
-# MOWN
+# MOWN recursion 
 class Solution(object):
     def combine(self, n, k):
         """

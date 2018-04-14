@@ -44,7 +44,7 @@ formula will only consist of letters, digits, and round parentheses, and is a va
 # Normal atom - The next token might be a number/count. Check whether if it is a count. If it is, add that atom and its count to the top of the stack.
 
 from collections import defaultdict
-
+import re
 
 class Solution(object):
     def countOfAtoms(self, formula):

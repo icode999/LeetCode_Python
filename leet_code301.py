@@ -66,7 +66,7 @@ class Solution(object):
                 continue
 
             for j in range(lj, i + 1):
-                if s[j] == par[1] and (j == lj or s[j - 1] != par[1]):
+                if s[j] == par[1] and (j == lj or s[j - 1] != par[1]): #  s[j-1] != pra[1] we check this so that we dont generate repeated combinations
                     self.remove(s[:j] + s[j + 1:], i, j, par)
 
             return
