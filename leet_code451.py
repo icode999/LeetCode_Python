@@ -37,10 +37,28 @@ Explanation:
 "bbaA" is also a valid answer, but "Aabb" is incorrect.
 Note that 'A' and 'a' are treated as two different characters.
 
+Companies
+Google Amazon
 """
 
+# Simplified
 from collections import defaultdict
+class Solution(object):
+    def frequencySort(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        mapr = defaultdict(int)
+        for char in s:
+            mapr[char] += 1
 
+        keys = mapr.keys()
+        keys.sort(key=lambda x: (-mapr[x], x))
+        return ''.join([key * mapr[key] for key in keys])
+
+
+from collections import defaultdict
 # MOWN
 # Solution: two dict, one for char: freq and second one for freq: [chars] and sort second dict keys and append
 class Solution(object):
