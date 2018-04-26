@@ -23,6 +23,7 @@ Try to solve it in O(n log k) time and O(n) extra space.
 
 """
 
+# simplified version
 from collections import defaultdict
 class Solution(object):
     def topKFrequent(self, words, k):
@@ -31,30 +32,10 @@ class Solution(object):
         :type k: int
         :rtype: List[str]
         """
-        words_map = defaultdict(int)
+        mapr = defaultdict(int)
         for word in words:
-            words_map[word] += 1
+            mapr[word] += 1
+        keys = mapr.keys()
 
-        count_list = defaultdict(list)
-        for word, count in words_map.iteritems():
-            count_list[count].append(word)
-
-        keys = count_list.keys()
-        keys.sort(reverse=True)
-        counter = k
-
-        result = list()
-        for key in keys:
-            count_list[key].sort()  # bug (need to sort, as we want alphabetically least )
-            if len(count_list[key]) < counter:
-                result += count_list[key][:]
-                counter -= len(count_list[key])
-
-            else:
-                result += count_list[key][:counter]
-                counter = 0
-
-            if not counter:
-                break
-
-        return result
+        keys.sort(key=lambda x: (-mapr[x], x))
+        return keys[:k]
