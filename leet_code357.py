@@ -9,36 +9,19 @@ Given n = 2, return 91. (The answer should be the total numbers in the range of 
 '''
 
 # MOWN
-# Solution:
-#add a number and increment count, backtrack. Keep a map to have all used digits
 
+from collections import defaultdict
 class Solution(object):
-    def __init__(self):
-        self.count = 1  # count 0
-        self.start = True
-
-    def countNumbersWithUniqueDigits(self, n):
+    def topKFrequent(self, nums, k):
         """
-        :type n: int
-        :rtype: int
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
         """
-        self.Helper(n, {})
-        return self.count
+        mapr = defaultdict(int)
+        for num in nums:
+            mapr[num] += 1
 
-    def Helper(self, n, mapr):
-        if n == 0:
-            return
-
-        start = 1 if self.start else 0
-        self.start = False
-
-        for j in range(start, 10):
-            if mapr.has_key(j):
-                continue
-
-            self.count += 1
-            mapr[j] = True
-            self.Helper(n - 1, mapr)
-            mapr.pop(j)
-
-        return
+        keys = mapr.keys()
+        keys.sort(key=lambda x: (-mapr[x], x))
+        return keys[:k]
