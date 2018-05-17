@@ -14,6 +14,7 @@ Elements of the given array will be in the range [-10,000, 10,000].
 Companies
 Google
 """
+# MOWN
 class Solution(object):
     def findMaxAverage(self, nums, k):
         """
