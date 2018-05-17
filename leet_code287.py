@@ -21,6 +21,7 @@ There is only one duplicate number in the array, but it could be repeated more t
 Companies
 Bloomberg
 """
+# MOWN
 class Solution(object):
     def findDuplicate(self, nums):
         """
@@ -33,5 +34,21 @@ class Solution(object):
             if previous == num:
                 return num
             previous = num
+
+        return None
+
+
+# Floyd's Tortoise and Hare (Cycle Detection)
+class Solution(object):
+    def findDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        for i in range(len(nums)):
+            if nums[abs(nums[i]) - 1] < 0:
+                return abs(nums[i])
+
+            nums[abs(nums[i]) - 1] *= -1
 
         return None
