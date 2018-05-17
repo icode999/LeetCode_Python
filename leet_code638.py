@@ -4,7 +4,7 @@
 In LeetCode Store, there are some kinds of items to sell. Each item has a price.
 
 However, there are some special offers, and a special offer consists of one or more different kinds of items with a sale price.
-
+~   ss
 You are given the each item's price, a set of special offers, and the number we need to buy for each item. The job is to output the lowest price you have to pay for exactly certain items as given, where you could make optimal use of the special offers.
 
 Each special offer is represented in the form of an array, the last number represents the price you need to pay for this special offer, other numbers represents how many specific items you could get if you buy this offer.
@@ -60,7 +60,7 @@ class Solution(object):
         return min(result)
 
     def Helper(self, special, needs):
-        result = list()
+        result = float('inf')
 
         if tuple(needs) in self.dp:
             return [self.dp[tuple(needs)]]
@@ -73,14 +73,13 @@ class Solution(object):
                     break
             else:
                 if tneeds == [0] * len(needs):
-                    result.append(sp[-1])
+                    result = min(result, sp[-1])
 
                 else:
                     tresult = self.Helper(special[idx:], tneeds)
-                    for res in tresult:
-                        result.append(res + sp[-1])
+                    result = min(result, tresult + sp[-1])
 
         if result:
-            self.dp[tuple(needs)] = min(result)
+            self.dp[tuple(needs)] = result
 
         return result
