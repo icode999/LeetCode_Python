@@ -33,7 +33,7 @@ Companies
 Google
 """
 # MOWN solution with Bug
-# iterate through indexs and replace
+# iterate through indexes and replace
 
 class Solution(object):
     def findReplaceString(self, S, indexes, sources, targets):
