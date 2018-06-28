@@ -14,22 +14,25 @@ Input:
 
 Output:
 [5,6]
+Hide Company Tags Google
+Hide Tags Array
+Hide Similar Problems (H) First Missing Positive (M) Find All Duplicates in an Array
 
-Companies 
-Google 
 """
-# MOWN Solution
-# since 1 <= a[i] <= n we can multiply the abs(number at index nums[i]) with -1
-# now look for nums < 0
 
+# looked up solution logic
 class Solution(object):
     def findDisappearedNumbers(self, nums):
         """
         :type nums: List[int]
         :rtype: List[int]
+        Solution
+        For each number i in nums,
+        we mark the number that i points as negative.
+        Then we filter the list, get all the indexes
+        who points to a positive number.
+        Since those indexes are not visited.
         """
-        for i in range(len(nums)):
-            idx = abs(nums[i]) - 1
-            nums[idx] = abs(nums[idx]) * -1
-
-        return [idx + 1 for idx, num in enumerate(nums) if num > 0]
+        for i in nums:
+            nums[abs(i)-1] = abs(nums[abs(i)-1])*-1
+        return [i+1 for i in range(len(nums)) if nums[i] > 0]
