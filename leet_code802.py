@@ -1,9 +1,11 @@
 """
 802. Find Eventual Safe States
 
-In a directed graph, we start at some node and every turn, walk along a directed edge of the graph.  If we reach a node that is terminal (that is, it has no outgoing directed edges), we stop.
+ bv, we start at some node and every turn, walk along a directed edge of the graph.  If we reach a node that is terminal
+ (that is, it has no outgoing directed edges), we stop.
 
-Now, say our starting node is eventually safe if and only if we must eventually walk to a terminal node.  More specifically, there exists a natural number K so that for any choice of where to walk, we must have stopped at a terminal node in less than K steps.
+Now, say our starting node is eventually safe if and only if we must eventually walk to a terminal node.
+More specifically, there exists a natural number K so that for any choice of where to walk, we must have stopped at a terminal node in less than K steps.
 
 Which nodes are eventually safe?  Return them as an array in sorted order.
 
@@ -24,40 +26,36 @@ Each graph[i] will be a sorted list of different integers, chosen within the ran
 
 Companies: Google
 """
+
+
 class Solution(object):
     def eventualSafeNodes(self, graph):
         """
         :type graph: List[List[int]]
         :rtype: List[int]
         """
-        self.result = {}
-        self.visited = dict()
-        self.graph = graph
-
-        result = list()
+        self.result, result = dict(), list()
+        self.graph = {i: j for i, j in enumerate(graph)}
         for i in range(len(graph)):
-            if i not in self.result:
-                self.Helper(i, {})
-
-            if self.result[i]:
+            if self.isSafe(i, {}):
                 result.append(i)
 
         return result
 
-    def Helper(self, n, visited):
-        if n in self.result:
-            return self.result[n]
-
+    def isSafe(self, n, visited):
         if n in visited:
             return False
 
-        tresult = True
-        visited[n] = True
+        if n in self.result:
+            return self.result[n]
 
+        visited[n] = True
+        result = True
         for node in self.graph[n]:
-            if not self.Helper(node, visited):
-                tresult = False
+            if not self.isSafe(node, visited):
+                result = False
+                break
 
         visited.pop(n)
-        self.result[n] = tresult
-        return tresult
+        self.result[n] = result
+        return result
