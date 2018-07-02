@@ -28,8 +28,6 @@ nums[i] will be an integer between 0 and 49,999.
 # then iterate through hash map and update degree and miner values
 
 from collections import defaultdict
-
-
 class Solution(object):
     def findShortestSubArray(self, nums):
         """

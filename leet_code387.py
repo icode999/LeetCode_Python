@@ -16,6 +16,7 @@ Companies
 Google Microsoft Amazon Bloomberg
 
 """
+# MOWN
 from collections import Counter
 class Solution(object):
     def firstUniqChar(self, s):

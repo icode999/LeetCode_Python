@@ -55,16 +55,16 @@ class Solution(object):
                     string += direction
                     continue
 
-                if grid[i][j]:
-                    string += direction
-                    grid[i][j] = 0
 
-                    stack.append([None, None, 'b'])  # bug [[1,1,0],[0,1,1],[0,0,0],[1,1,1],[0,1,0]]
-                    # If we dont add the end (b) we get same pattern for both islands (ORDR and ORDR)
+                string += direction
+                grid[i][j] = 0
 
-                    for ni, nj, tdirection in neighbours:
-                        if 0 <= i + ni < len(grid) and 0 <= j + nj < len(grid[0]) and grid[ni + i][nj + j] == 1:
-                            stack.append([ni + i, nj + j, tdirection])
+                stack.append([None, None, 'b'])  # bug [[1,1,0],[0,1,1],[0,0,0],[1,1,1],[0,1,0]]
+                # If we dont add the end (b) we get same pattern for both islands (ORDR and ORDR)
+
+                for ni, nj, tdirection in neighbours:
+                    if 0 <= i + ni < len(grid) and 0 <= j + nj < len(grid[0]) and grid[ni + i][nj + j] == 1:
+                        stack.append([ni + i, nj + j, tdirection])
 
             return string
 

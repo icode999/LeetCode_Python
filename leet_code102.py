@@ -17,7 +17,12 @@ return its level order traversal as:
   [15,7]
 ]
 
+Hide Company Tags LinkedIn Facebook Amazon Microsoft Apple Bloomberg
+Show Tags
+Show Similar Problems
+
 """
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -25,6 +30,8 @@ return its level order traversal as:
 #         self.left = None
 #         self.right = None
 
+# iterative
+from collections import deque
 class Solution(object):
     def levelOrder(self, root):
         """
@@ -33,21 +40,35 @@ class Solution(object):
         """
         if not root:
             return []
-
-        stack = [root]
+        stack = deque([root])
         result = list()
-
         while True:
-            tstack, tresult = list(), list()
-            for node in stack:
-                tresult.append(node.val)
-                for tnode in [node.left, node.right]:
-                    if tnode:
-                        tstack.append(tnode)
+            temp_s, temp_result = list(), list()
+            while stack:
+                troot = stack.popleft()
+                temp_result.append(troot.val)
+                for node in [troot.left, troot.right]:
+                    if node:
+                        temp_s.append(node)
 
-            result.append(tresult)  # remember to do this always before we break the loop
-            if not tstack:
-                break
-            stack = tstack[:]
+            result.append(temp_result)
+            if not temp_s:
+                return result
+            stack = deque(temp_s)
+
+# simplified iterative
+class Solution(object):
+    def levelOrder(self, root):
+        if not root:
+            return []
+
+        stack, result = [root], []
+        while stack:
+            result.append([node.val for node in stack])
+            temp = []
+            for node in stack:
+                temp += [node.left, node.right]
+
+            stack = [node for node in temp if node]
 
         return result

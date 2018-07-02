@@ -23,7 +23,7 @@ Example 2:
 
 Input: [16,17,18]
 Output: 2
-Explanation: Friend requests are made 17 -> 16, 18 -> 17.
+Explanation: Friend requests are made 17 -> 100...6, 18 -> 17.
 Example 3:
 
 Input: [20,30,100,110,120]

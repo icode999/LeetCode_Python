@@ -85,7 +85,7 @@ So in short, we can figure out the number of pairs (j, q) using a linear scan.
 # LUP solution1 got TLE
 # Idea is to iterate rows instead columns
 # for each two row we get count of No.of places we have both rows i.e grid[row1][j] and grid[row2][j]
-# once we get that count, all we have to do is select 2 items out of it nc2 --> n!/2!*(n-1)! => n(n-1)/2
+# once we get that count, all we have to do is select 2 items out of it nc2 --> n!/2!*(n-2)! => n(n-1)/2
 
 class Solution1(object):
     def countCornerRectangles(self, grid):

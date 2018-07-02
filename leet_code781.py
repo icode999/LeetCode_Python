@@ -1,7 +1,8 @@
 """
 781. Rabbits in Forest
 
-In a forest, each rabbit has some color. Some subset of rabbits (possibly all of them) tell you how many other rabbits have the same color as them. Those answers are placed in an array.
+In a forest, each rabbit has some color. Some subset of rabbits (possibly all of them) tell you how many other rabbits have the same color as them.
+ Those answers are placed in an array.
 
 Return the minimum number of rabbits that could be in the forest.
 
@@ -27,9 +28,8 @@ Each answers[i] will be an integer in the range [0, 999].
 
 Companies
 Wish
-
-
 """
+
 class Solution(object):
     def numRabbits(self, answers):
         """
@@ -38,7 +38,7 @@ class Solution(object):
         """
         result, mapr = 0, dict()
         for num in answers:
-            # if num is 0, that means there no other rabits of that color, so we add 1
+            # if num is 0, that means there no other rabbits of that color, so we add 1
             if num == 0:
                 result += 1
 
