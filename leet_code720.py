@@ -1,7 +1,8 @@
 """
 720. Longest Word in Dictionary
 
-Given a list of strings words representing an English Dictionary, find the longest word in words that can be built one character at a time by other words in words. If there is more than one possible answer, return the longest word with the smallest lexicographical order.
+Given a list of strings words representing an English Dictionary, find the longest word in words that can be built one character at a time by other words in words.
+If there is more than one possible answer, return the longest word with the smallest lexicographical order.
 
 If there is no answer, return the empty string.
 Example 1:
@@ -31,8 +32,6 @@ The length of words[i] will be in the range [1, 30].
 # then do recursive calls to get the world
 
 from collections import defaultdict
-
-
 class Solution(object):
     def longestWord(self, words):
         """
