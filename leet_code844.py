@@ -65,3 +65,26 @@ class Solution(object):
                 return False
 
         return True
+
+# MOWN using stack
+class Solution(object):
+    def backspaceCompare(self, S, T):
+        """
+        :type S: str
+        :type T: str
+        :rtype: bool
+        """
+
+        def get_string(string):
+            stack = list()
+            for char in string:
+                if char == '#':
+                    if stack:
+                        stack.pop()
+
+                else:
+                    stack.append(char)
+
+            return stack
+
+        return get_string(S) == get_string(T)
