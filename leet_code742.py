@@ -61,8 +61,6 @@ Amazon
 
 # LUP--> convert the tree to undirected graph and do BFS, return the first leaf node we hit
 from collections import defaultdict
-
-
 class Solution(object):
     def findClosestLeaf(self, root, k):
         """
@@ -88,14 +86,13 @@ class Solution(object):
                         traverse(tnode)
 
         traverse(root)
-
         que = [k]
-        while que:
-            tque = []
-            for item in que:
-                if item in leaf_nodes:
-                    return item
-                tque += graph.pop(item,
-                                  [])  # Got TLE with tque += graph[item], good idea to remove the item from graph so we consider it as visited
+        counter = 0
 
-            que = tque
+        while counter < len(que):
+            current = que[counter]
+            if current in leaf_nodes:
+                return current
+            que += graph.pop(current,
+                             [])  # Got TLE with tque += graph[item], good idea to remove the item from graph so we consider it as visited
+            counter += 1
