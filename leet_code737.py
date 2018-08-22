@@ -55,7 +55,7 @@ class Solution(object):
             self.visited = set([words1[i]])
             if words1[i] != words2[i] and not self.is_similar(words1[i], words2[i]):
                 return False
-        return True
+        return   True
 
     def is_similar(self, str1, str2):
         for tstr in self.mapr[str1]:
