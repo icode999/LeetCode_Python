@@ -30,7 +30,6 @@ The length of words[i] will be in the range [1, 30].
 # get words map defaultdict(<type 'list'>, {u'w_': [u'wo'], u'wo_': [u'wor'], u'worl_': [u'world'], u'_': [u'w'], u'wor_': [u'worl']})
 
 # then do recursive calls to get the world
-
 from collections import defaultdict
 class Solution(object):
     def longestWord(self, words):
@@ -38,27 +37,22 @@ class Solution(object):
         :type words: List[str]
         :rtype: str
         """
-        self.words_map = defaultdict(list)
+        mapr = defaultdict(list)
         for word in words:
-            self.words_map[word[:-1] + '_'].append(word)
+            tword = word[:-1] + "_"
+            mapr[tword].append(word)
 
-        self.result = None
-        self.maxer = 0
+        # BUG: return smallest lexographical word in case of multiple answers
+        # so need to sort
+        stack = sorted(mapr["_"], reverse=True)
+        result = ""
 
-        tresult, _ = self.get_max_word('')
-        return tresult
+        while stack:
+            word = stack.pop()
+            if len(word) > len(result):
+                result = word
 
-    def get_max_word(self, word):
+            if word + "_" in mapr:
+                stack += sorted(mapr[word + "_"], reverse=True)
 
-        if not self.words_map.has_key(word + '_'):
-            return word, len(word)
-
-        tresult = None
-        tmax = 0
-
-        for tword in self.words_map[word + '_']:
-            temp_word, temp_len = self.get_max_word(tword)
-            if tmax < temp_len:
-                tresult, tmax = temp_word, temp_len
-
-        return tresult, tmax
+        return result
