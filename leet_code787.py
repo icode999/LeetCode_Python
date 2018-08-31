@@ -76,8 +76,6 @@ class Solution(object):
 
 # BFS
 from collections import defaultdict, deque
-
-
 class Solution(object):
     def findCheapestPrice(self, n, flights, osrc, odst, K):
         """

@@ -65,8 +65,11 @@ Poynt
 #         self.left = None
 #         self.right = None
 
-# MOWN Solution
-# BFS, ignore all Null node at the start and end of each level and get max length
+# LUP
+# BFS
+from collections import deque
+
+
 class Solution(object):
     def widthOfBinaryTree(self, root):
         """
@@ -76,58 +79,23 @@ class Solution(object):
         if not root:
             return 0
 
-        current = [root]
         result = 0
+        # Node, depth, pos
+        stack = deque([[root, 0, 0]])
+        current_depth, start_pos = 0, 0
+        while stack:
+            node, depth, pos = stack.popleft()
+            if node.left:
+                stack.append([node.left, depth + 1, pos * 2])
 
-        while current:
-            next_level = list()
-            none_counter = 0
+            if node.right:
+                stack.append([node.right, depth + 1, pos * 2 + 1])
 
-            for node in current:
-                if not node:
-                    none_counter += 2
+            if depth != current_depth:
+                current_depth = depth
+                start_pos = pos
+                continue
 
-                else:
-                    for tnode in [node.left, node.right]:
-                        if tnode:
-                            if next_level:  # BUG : [1,1,1,1,1,1,1,null,null,null,1,null,null,null,null,2,2,2,2,2,2,2,null,2,null,null,2,null,2]
-                                # strip all the none from starting and ending of the next_level
-                                next_level += [None] * none_counter
-
-                            next_level += [tnode]
-                            none_counter = 0
-                        else:
-                            none_counter += 1
-
-            result = max(result, len(current))
-            current = next_level
-
-        return result
-
-
-# LUP Solution
-# BFS, give each a node a pos, its left child will have pos: root_pos*2, right child will have pos: root_pos*2+1
-# (root will have 0, left child pos is 0 and right child pos is 1)
-# everytime we got to next level we have to save the pos of left, so no.of nodes will be right_pos - left_pos + 1, we take max
-
-class Solution(object):
-    def widthOfBinaryTree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        stack = [(root, 0, 0)]
-        current_depth, left, result = 0, 0, 0
-
-        for node, depth, pos in stack:
-            if node:
-                stack.append((node.left, depth + 1, pos * 2))
-                stack.append((node.right, depth + 1, pos * 2 + 1))
-
-                if depth != current_depth:
-                    current_depth = depth
-                    left = pos
-
-                result = max(result, pos - left + 1)
+            result = max(result, pos - start_pos + 1)
 
         return result
