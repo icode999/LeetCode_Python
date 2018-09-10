@@ -25,7 +25,6 @@ Companies
 Google 2
 """
 
-
 class Solution(object):
     def peakIndexInMountainArray(self, A):
         """
@@ -33,7 +32,6 @@ class Solution(object):
         :rtype: int
         """
         low, high = 0, len(A) - 1
-        thigh = len(A) - 1
 
         while low < high:
             mid = (low + high) / 2
