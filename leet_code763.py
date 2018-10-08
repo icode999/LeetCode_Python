@@ -18,32 +18,20 @@ S will consist of lowercase letters ('a' to 'z') only.
 Companies
 Amazon 5
 """
-from collections import defaultdict
 class Solution(object):
     def partitionLabels(self, S):
         """
         :type S: str
         :rtype: List[int]
         """
-        result = list()
-        mapr = defaultdict(list)
+        result = []
+        mapr = {char: idx for idx, char in enumerate(S)}
+
+        previous = current = 0
         for idx, char in enumerate(S):
-            mapr[char].append(idx)
-
-        start = 0
-        while start < len(S):
-            end = mapr[S[start]][-1]
-            current = set(S[start])
-            tstart = start
-            start += 1
-
-            while start <= end:
-                if S[start] not in current:
-                    end = max(mapr[S[start]][-1], end)
-                    current.add(S[start])
-
-                start += 1
-
-            result.append(start - tstart)
+            current = max(current, mapr[char])
+            if current == idx:
+                result.append(current - previous + 1)
+                previous = current + 1
 
         return result
