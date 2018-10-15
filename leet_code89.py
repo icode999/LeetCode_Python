@@ -29,25 +29,19 @@ class Solution(object):
         :type n: int
         :rtype: List[int]
         """
-        if not n:
+        if n == 0:
             return [0]
-
-        return map(lambda num: int(num, 2), self.Helper(['0', '1'], n))
-
-    def Helper(self, bin_list, iter):
-        if not iter:
-            return None
-
-        tresult = self.Helper(bin_list, iter - 1)
-        result = list()
-        if not tresult:
-            result = bin_list[:]
+        elif n == 1:
+            return [0, 1]
 
         else:
-            for num in bin_list:
-                if num == '1':
-                    tresult = tresult[::-1]  # this is critical in this
-                for res in tresult:
-                    result.append(num + res)
+            o_list, i_list = ['0'], ['1']
+            for i in range(2, n + 1):
+                to_list, ti_list = list(), list()
+                for num in o_list + i_list:
+                    to_list.append('0' + num)
+                    ti_list.append('1' + num)
 
-        return result
+                o_list, i_list = to_list, ti_list[::-1]
+
+            return map(lambda x: int(x, 2), o_list + i_list)

@@ -24,6 +24,7 @@ times is a strictly increasing array with all elements in [0, 10^9].
 TopVotedCandidate.q is called at most 10000 times per test case.
 TopVotedCandidate.q(int t) is always called with t >= times[0].
 """
+# MOWN , use binary search to find insert position
 from collections import defaultdict
 class TopVotedCandidate(object):
     def __init__(self, persons, times):
