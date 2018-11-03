@@ -58,3 +58,34 @@ class Solution(object):
             if all(char in si for char in word):
                 return word
         return ''
+
+# MOWN much faster than above using map
+from collections import defaultdict
+class Solution(object):
+    def findLongestWord(self, s, d):
+        """
+        :type s: str
+        :type d: List[str]
+        :rtype: str
+        """
+        datas = defaultdict(list)
+        for idx, char in enumerate(s):
+            datas[char].append(idx)
+        
+        d = sorted(d, key=lambda w: (-len(w), w))
+        for word in d:
+            current = -1
+            for char in word:
+                if char in datas:
+                    for idx in datas[char]:
+                        if idx > current:  # this can be improved by using binary search
+                            current = idx
+                            break
+                    else:
+                       break
+                else:
+                    break
+            else:
+                return word
+        return ""
+                
